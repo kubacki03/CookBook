@@ -1,4 +1,4 @@
-import React from "react";
+ï»¿import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,8 +14,8 @@ interface LoginFormProps {
 }
 
 const schema = yup.object().shape({
-    email: yup.string().email("Nieprawid³owy email").required("Email jest wymagany"),
-    password: yup.string().min(6, "Has³o musi mieæ co najmniej 6 znaków").required("Has³o jest wymagane"),
+    email: yup.string().email("NieprawidÅ‚owy email").required("Email jest wymagany"),
+    password: yup.string().min(6, "HasÅ‚o musi mieÄ‡ co najmniej 6 znakÃ³w").required("HasÅ‚o jest wymagane"),
 });
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin, serverError }) => {
@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, serverError }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto p-4 border rounded shadow bg-white">
-            <h2 className="text-xl font-bold mb-4">Zaloguj siê</h2>
+            <h2 className="text-xl font-bold mb-4">Zaloguj siÄ™</h2>
 
             <div className="mb-4">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -48,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, serverError }) => {
             </div>
 
             <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Has³o</label>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">HasÅ‚o</label>
                 <input
                     id="password"
                     type="password"
@@ -65,7 +65,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, serverError }) => {
                 type="submit"
                 className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
             >
-                Zaloguj siê
+                Zaloguj siÄ™
             </button>
         </form>
     );

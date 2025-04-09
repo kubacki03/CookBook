@@ -1,8 +1,9 @@
-// Dashboard.tsx
+
 import React from "react";
 import SearchRecipes from "./SearchRecipes";
 import FoundRecipesList from "./FoundRecipesList";
 import Logout from "./Logout";
+import AddRecipe from "./AddRecipe";
 
 const Dashboard: React.FC = () => {
     return (
@@ -10,7 +11,7 @@ const Dashboard: React.FC = () => {
         <Logout/>
             <h1>Witaj na Dashboardzie!</h1>
             <SearchRecipes />
-            
+            <AddRecipe/>
         </div>
     );
 };

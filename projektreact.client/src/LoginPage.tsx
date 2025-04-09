@@ -1,4 +1,4 @@
-
+ï»¿
 import { useState } from "react";
 import axios from "axios";
 import LoginForm from "./LoginForm";
@@ -8,13 +8,13 @@ import React from "react";
 
 const LoginPage: React.FC = () => {
     const [serverError, setServerError] = useState<string | undefined>(undefined);
-   const navigate = useNavigate(); // u¿yj hooka
+   const navigate = useNavigate(); 
 
     const handleLogin = async (data: { email: string; password: string }) => {
         try {
             const response = await axios.post("http://localhost:5119/Login/login", data);
 
-            console.log("Zalogowano pomyœlnie:", response.data);
+            console.log("Zalogowano pomyÅ›lnie:", response.data);
 
             localStorage.setItem("token", response.data.token);
 
@@ -22,9 +22,9 @@ const LoginPage: React.FC = () => {
 
         } catch (error: any) {
             if (error.response) {
-                setServerError(error.response.data.message || "B³¹d logowania");
+                setServerError(error.response.data.message || "BÅ‚Ä…d logowania");
             } else {
-                setServerError("Nie uda³o siê po³¹czyæ z serwerem.");
+                setServerError("Nie udaÅ‚o siÄ™ poÅ‚Ä…czyÄ‡ z serwerem.");
             }
         }
     };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import axios from "axios";
 import FoundRecipesList from "./FoundRecipesList";
 
@@ -27,7 +27,7 @@ const SearchRecipes: React.FC = () => {
         <div style={{ padding: 20 }}>
             <input
                 type="text"
-                placeholder="Wpisz nazw� przepisu..."
+                placeholder="Wpisz nazwę przepisu..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{ padding: 8, fontSize: 16, marginRight: 8 }}

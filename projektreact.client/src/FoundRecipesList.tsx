@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ï»¿import React, { useState } from "react";
 
 type Ingredient = {
     id: number;
@@ -23,7 +23,7 @@ const FoundRecipesList: React.FC<FoundRecipesListProps> = ({ recipes }) => {
     const [hoveredRecipeId, setHoveredRecipeId] = useState<number | null>(null);
 
     if (recipes.length === 0) {
-        return <p>Brak wyników.</p>;
+        return <p>Brak wynikÃ³w.</p>;
     }
 
     return (
@@ -51,7 +51,7 @@ const FoundRecipesList: React.FC<FoundRecipesListProps> = ({ recipes }) => {
                         }}>
                             {recipe.ingredients.map((ingredient) => (
                                 <li key={ingredient.id}>
-                                    {ingredient.ingredientName} – {ingredient.weight}g
+                                    {ingredient.ingredientName} â€“ {ingredient.weight}g
                                 </li>
                             ))}
                         </ul>
