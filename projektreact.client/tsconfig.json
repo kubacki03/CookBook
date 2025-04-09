@@ -1,13 +1,12 @@
 {
-  "files": [],
+    "files": [],
     "references": [
         { "path": "./tsconfig.app.json" },
         { "path": "./tsconfig.node.json" }
     ],
-    {
-        "compilerOptions": {
-            "esModuleInterop": true,
-            "allowSyntheticDefaultImports": true
-        }
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "module": "esnext"
     }
 }
