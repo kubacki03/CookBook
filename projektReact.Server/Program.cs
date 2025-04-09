@@ -13,11 +13,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 
 
-// Add services to the container.
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 
-// Dodaj autoryzacjê i JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,7 +56,6 @@ app.UseCors("AllowAll");
 app.UseDefaultFiles();
 app.MapStaticAssets();
 
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
@@ -67,9 +64,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
-var passwordHasher = new PasswordHasher<User>();
-var user = new User { Id = "sdadsaookl", Username = "admin@wp.pl" };
-var hashedPassword = passwordHasher.HashPassword(user, "Polichronowe2.");
-Console.WriteLine(hashedPassword);
+
 
 app.Run();

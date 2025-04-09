@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
 
             localStorage.setItem("token", response.data.token);
 
-          navigate("/dashboard"); // <-- przekierowanie po udanym logowaniu
+          navigate("/dashboard"); 
 
         } catch (error: any) {
             if (error.response) {

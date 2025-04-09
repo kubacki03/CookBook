@@ -1,15 +1,26 @@
-// App.tsx
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./LoginPage";
-import Dashboard from "./Dashboard"; // Upewnij siê, ¿e taki plik istnieje
+import React, { ReactNode } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import Dashboard from './Dashboard';
 
-const App: React.FC = () => {
+
+interface PrivateRouteProps {
+    element: ReactNode;
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
+    const token = localStorage.getItem('token');
+    return token ? <>{element}</> : <Navigate to="/" />;
+};
+
+const App = () => {
     return (
         <Router>
             <Routes>
+              
                 <Route path="/" element={<LoginPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+             
+                <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
             </Routes>
         </Router>
     );
