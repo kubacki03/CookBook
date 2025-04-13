@@ -1,5 +1,8 @@
-import axios from "axios";
+ï»¿import axios from "axios";
+import React from "react";
+
 import { useEffect, useState } from "react";
+import Logout from "./Logout";
 
 type Ingredient = {
     ingredientName: string;
@@ -31,7 +34,7 @@ function UserRecipes() {
                 console.log(response.data);
                 setRecipes(response.data);
             } catch (err: any) {
-                setError("B³¹d podczas pobierania danych.");
+                setError("Bï¿½ï¿½d podczas pobierania danych.");
                 console.error(err);
             }
         };
@@ -42,27 +45,39 @@ function UserRecipes() {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
-            <h2>Moje przepisy:</h2>
-            {recipes.length === 0 ? (
-                <p>Brak przepisów.</p>
-            ) : (
-                recipes.map((recipe, index) => (
-                    <div key={index} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
-                        <h3>{recipe.title}</h3>
-                        <p>{recipe.description}</p>
-                        <ul>
-                            {recipe.ingredients?.map((ingredient, i) => (
-                                <li key={i}>
-                                    {ingredient.ingredientName} - {ingredient.weight}g
-                                </li>
-                            ))}
-                        </ul>
+        <div >
+            <header className="flex h-12 items-center gap-x-4 bg-amber-300 p-2">
+                <Logout />
+                <a className=" text-lg font-bold" href="/dashboard">Strona gÅ‚Ã³wna</a>
+                <a className="text-lg font-bold" href="/recipes">Moje przepisy</a>
+            </header>
 
-                    </div>
-                ))
+            <h2 className="mb-4 text-2xl font-bold">Moje przepisy:</h2>
+
+            {recipes.length === 0 ? (
+                <p className="text-gray-500">Brak przepisï¿½w.</p>
+            ) : (
+                <div className="space-y-6">
+                    {recipes.map((recipe, index) => (
+                        <div
+                            key={index}
+                            className="rounded-xl bg-white p-4 shadow-md transition hover:shadow-lg"
+                        >
+                            <h3 className="mb-2 text-xl font-semibold text-amber-700">{recipe.title}</h3>
+                            <p className="mb-3 text-gray-700">{recipe.description}</p>
+                            <ul className="list-inside list-disc text-gray-600">
+                                {recipe.ingredients?.map((ingredient, i) => (
+                                    <li key={i}>
+                                        {ingredient.ingredientName}: {ingredient.weight}g
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
+
     );
 }
 

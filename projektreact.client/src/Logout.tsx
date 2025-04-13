@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 function Logout() {
@@ -12,7 +12,7 @@ function Logout() {
     };
 
     return (
-        <button onClick={handleLogout}>Wyloguj</button>
+        <button onClick={handleLogout} className=" text-lg font-bold">Wyloguj</button>
     );
 }
 

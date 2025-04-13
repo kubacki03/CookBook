@@ -29,20 +29,24 @@ const SearchRecipes: React.FC = () => {
     };
 
     return (
-        <div style={{ padding: 20 }}>
+        <div className="flex flex-col items-center gap-4 p-4 md:flex-row">
             <input
                 type="text"
                 placeholder="Wpisz nazwę przepisu..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: 8, fontSize: 16, marginRight: 8 }}
+                className="w-full md:w-80 px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
-            <button onClick={handleSearch} style={{ padding: 8, fontSize: 16 }}>
+            <button
+                onClick={handleSearch}
+                className="rounded-xl bg-amber-500 px-6 py-2 text-white transition-colors hover:bg-amber-600"
+            >
                 Szukaj
             </button>
 
             <FoundRecipesList recipes={recipes} />
         </div>
+
     );
 };
 
