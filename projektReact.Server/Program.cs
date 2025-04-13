@@ -46,7 +46,9 @@ builder.Services.AddCors(options =>
         policy
             .AllowAnyOrigin()
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowAnyHeader()
+            .WithExposedHeaders("Authorization");
+            
     });
 });
 
@@ -57,7 +59,7 @@ app.UseDefaultFiles();
 app.MapStaticAssets();
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 

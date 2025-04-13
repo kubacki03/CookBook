@@ -1,4 +1,5 @@
-﻿import React from "react";
+﻿import axios from "axios";
+import React from "react";
 import { useForm, useFieldArray } from 'react-hook-form';
 
 type FormData = {
@@ -29,10 +30,27 @@ const RecipeForm: React.FC = () => {
         name: "Ingredients",
     });
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: FormData) => {
         console.log("Dane z formularza:", data);
-        // wysłanie do API
+
+       
+        const token = localStorage.getItem('token'); 
+
+        try {
+           
+            const response = await axios.post('http://localhost:5119/Recipe/AddRecipe', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                },
+            });
+
+          
+            console.log("Odpowiedź:", response);
+        } catch (error) {
+            console.error("Błąd podczas dodawania przepisu:", error);
+        }
     };
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
