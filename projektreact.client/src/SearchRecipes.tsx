@@ -10,17 +10,9 @@ const SearchRecipes: React.FC = () => {
         if (!searchTerm) return;
 
         try {
-            const token = localStorage.getItem("token");
-            console.log("Token:", token);
-            const response = await axios.get(
-                `http://localhost:5119/Recipe/GetRecipes`, 
-                {
-                    params: { name: searchTerm },
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
+            const response = await axios.get("/Recipe/GetRecipes", {
+                params: { name: searchTerm }
+            });
 
             setRecipes(response.data);
         } catch (error) {

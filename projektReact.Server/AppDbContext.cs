@@ -34,15 +34,16 @@
                      .HasForeignKey(l => l.UserId);
 
                 modelBuilder.Entity<Recipe>()
-                    .HasMany(a=>a.Ingredients)
-                    .WithOne(p=>p.Recipe)
-                    .HasForeignKey(d=>d.RecipeId);
+                    .HasMany(a => a.Ingredients)
+                    .WithOne(p => p.Recipe)
+                    .HasForeignKey(d => d.RecipeId);
 
                 var us = new User
                 {
                     Id = "sdadsaookl",
                     Username = "admin@wp.pl",
-                    Password = "AQAAAAIAAYagAAAAEFacXzmHLjAGh4bGa5X2lO32T424kyKeGpsAVvSYAYr529ULQQ7tUrVJ9E/bFTR7mA=="
+                    Password = "AQAAAAIAAYagAAAAEFacXzmHLjAGh4bGa5X2lO32T424kyKeGpsAVvSYAYr529ULQQ7tUrVJ9E/bFTR7mA==",
+                    Role = Roles.Admin
                 };
                 modelBuilder.Entity<User>().HasData(us);
 

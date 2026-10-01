@@ -5,7 +5,7 @@ using projektReact.Server.DataModels;
 using projektReact.Server.ProjektWPF.Data;
 using projektReact.Server.RequestModels;
 
-namespace projektReact.Server
+namespace projektReact.Server.Controllers
 {
 
     [Route("[controller]")]
@@ -36,7 +36,8 @@ namespace projektReact.Server
             recipe.User = user;
             recipe.UserId = user.Id;
 
-            foreach(var ingredient in request.Ingredients){
+            foreach (var ingredient in request.Ingredients)
+            {
                 recipe.Ingredients.Add(new Ingredient { IngredientName = ingredient.IngredientName, Weight = ingredient.Weight });
             }
 
@@ -47,7 +48,7 @@ namespace projektReact.Server
 
 
         [HttpGet("GetRecipes")]
-      [Authorize]
+        [Authorize]
         public IActionResult GetRecipes([FromQuery] string name)
         {
             var found = _context.Recipes
@@ -66,9 +67,11 @@ namespace projektReact.Server
                     }).ToList()
                 })
                 .ToList();
-            Console.Write("User "+User.Identity?.Name);
+            Console.Write("User " + User.Identity?.Name);
             return Ok(found);
         }
+
+
 
 
         [HttpGet("GetUserRecipes")]
@@ -81,15 +84,15 @@ namespace projektReact.Server
             {
                 return Unauthorized();
             }
-            var recipes = _context.Recipes.Include(x=>x.Ingredients).Where(p => p.UserId == user.Id);
+            var recipes = _context.Recipes.Include(x => x.Ingredients).Where(p => p.UserId == user.Id);
 
             var recipesDtoList = new List<RecipeRequest>();
 
-            foreach(var recipe in recipes)
+            foreach (var recipe in recipes)
             {
                 recipesDtoList.Add(new RecipeRequest
                 {
-                    
+
                     Title = recipe.Title,
                     Description = recipe.Description,
                     Ingredients = recipe.Ingredients.Select(i => new IngredientRequest
@@ -103,9 +106,8 @@ namespace projektReact.Server
 
             return Ok(recipesDtoList);
         }
- 
-    }
 
+    }
 
     public class RecipeRequest
     {
@@ -114,7 +116,7 @@ namespace projektReact.Server
         public List<IngredientRequest> Ingredients { get; set; }
     }
 
-    public class IngredientRequest
+    public sealed class IngredientRequest
     {
         public string IngredientName { get; set; }
         public float Weight { get; set; }

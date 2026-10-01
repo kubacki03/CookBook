@@ -48,7 +48,8 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
+            // API przez proxy -> to samo origin, więc ciasteczko z JWT (SameSite=Strict) jest wysyłane
+            '^/(Login|Recipe|Register)/': {
                 target,
                 secure: false
             }

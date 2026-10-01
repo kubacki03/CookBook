@@ -1,12 +1,14 @@
-﻿namespace projektReact.Server
+﻿namespace projektReact.Server.Services
 {
-    public  class SimilarityService
+    public class SimilarityService
     {
-      
+
         public static double GetJaroWinklerDistance(string s1, string s2)
         {
             if (string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2))
+            {
                 return 0.0;
+            }
 
             int m = 0;
             int t = 0;
@@ -33,7 +35,9 @@
             }
 
             if (m == 0)
+            {
                 return 0.0;
+            }
 
             int k = 0;
             for (int i = 0; i < s1.Length; i++)
@@ -53,11 +57,8 @@
                     k++;
                 }
             }
-
             t /= 2;
-
             double jaro = ((double)m / s1.Length + (double)m / s2.Length + (double)(m - t) / m) / 3.0;
-
             const double prefixScalingFactor = 0.1;
             int prefixLength = 0;
 
@@ -72,7 +73,6 @@
                     break;
                 }
             }
-
             return jaro + prefixScalingFactor * prefixLength * (1 - jaro);
         }
     }

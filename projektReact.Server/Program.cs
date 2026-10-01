@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using projektReact.Server.Controllers;
 using projektReact.Server.DataModels;
 using projektReact.Server.ProjektWPF.Data;
 using System.Text;
@@ -32,6 +33,16 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtIssuer,
         ValidAudience = jwtIssuer,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
+
+    // Token jest w ciasteczku HttpOnly, a nie w nagłówku Authorization
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies[LoginController.AuthCookieName];
+            return Task.CompletedTask;
+        }
     };
 });
 

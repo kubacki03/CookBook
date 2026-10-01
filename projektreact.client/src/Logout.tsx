@@ -1,14 +1,16 @@
 
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Logout() {
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        
-        localStorage.removeItem('token');
-        
-        navigate('/');
+    const handleLogout = async () => {
+        try { 
+            await axios.post('/Login/logout');
+        } finally {
+            navigate('/');
+        }
     };
 
     return (

@@ -15,10 +15,8 @@ const Dashboard: React.FC = () => {
                 <a className="text-lg font-bold" href="/recipes">Moje przepisy</a>
             </header>
 
-       
-           
             <SearchRecipes />
-            <AddRecipe/>
+            <AddRecipe />
         </div>
     );
 };

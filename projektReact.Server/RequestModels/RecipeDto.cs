@@ -1,4 +1,4 @@
-﻿using static projektReact.Server.RecipeController;
+﻿using static projektReact.Server.Controllers.RecipeController;
 
 namespace projektReact.Server.RequestModels
 {

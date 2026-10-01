@@ -1,38 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import axios from 'axios';
 import LoginPage from './LoginPage';
 import Dashboard from './Dashboard';
-import { jwtDecode } from 'jwt-decode';
 import UserRecipes from './UserRecipes';
 
-interface JwtPayload {
-    exp: number;
-}
 interface PrivateRouteProps {
     element: ReactNode;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
-    const token = localStorage.getItem('token');
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => { 
+    const [status, setStatus] = useState<'loading' | 'ok' | 'unauthorized'>('loading');
 
-    if (!token) return <Navigate to="/" />;
+    useEffect(() => {
+        axios.get('/Login/me')
+            .then(() => setStatus('ok'))
+            .catch(() => setStatus('unauthorized'));
+    }, []);
 
-    try {
-        const decoded = jwtDecode<JwtPayload>(token);
-        const currentTime = Date.now() / 1000;
+    if (status === 'loading') return null;
+    if (status === 'unauthorized') return <Navigate to="/" />;
 
-        if (decoded.exp < currentTime) {
-            localStorage.removeItem('token');
-            return <Navigate to="/" />;
-        }
-
-        return <>{element}</>;
-
-    } catch (error) {
-     
-        localStorage.removeItem('token');
-        return <Navigate to="/" />;
-    }
+    return <>{element}</>;
 };
 
 const App = () => {

@@ -19,16 +19,12 @@ function UserRecipes() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [error, setError] = useState<string | null>(null);
 
+
+
     useEffect(() => {
         const fetchUserRecipes = async () => {
             try {
-                const token = localStorage.getItem("token");
-                const response = await axios.get('http://localhost:5119/Recipe/GetUserRecipes', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-
-                });
+                const response = await axios.get('/Recipe/GetUserRecipes');
 
                 console.log(response.data);
                 setRecipes(response.data);

@@ -33,16 +33,8 @@ const RecipeForm: React.FC = () => {
     const onSubmit = async (data: FormData) => {
         console.log("Dane z formularza:", data);
 
-       
-        const token = localStorage.getItem('token'); 
-
         try {
-           
-            const response = await axios.post('http://localhost:5119/Recipe/AddRecipe', data, {
-                headers: {
-                    'Authorization': `Bearer ${token}`, 
-                },
-            });
+            const response = await axios.post('/Recipe/AddRecipe', data);
 
           
             console.log("Odpowiedź:", response);
