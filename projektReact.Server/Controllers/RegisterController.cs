@@ -1,36 +1,29 @@
-﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using projektReact.Server.DataModels;
-using projektReact.Server.ProjektWPF.Data;
+using projektReact.Server.Interfaces;
 using projektReact.Server.RequestModels;
 
 namespace projektReact.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RegisterController : Controller
+    public class RegisterController : ControllerBase
     {
+        private readonly IAuthService _authService;
 
-        private readonly AppDbContext _context;
-
-        public RegisterController(AppDbContext context)
+        public RegisterController(IAuthService authService)
         {
-            _context = context;
+            _authService = authService;
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel registerModel)
+        public async Task<IActionResult> Register(RegisterModel registerModel, CancellationToken ct)
         {
-            var user = _context.Users.FirstOrDefault(p => p.Username == registerModel.Username);
-            if (user != null)
+            var created = await _authService.RegisterAsync(registerModel.Username, registerModel.Password, ct);
+            if (!created)
             {
-                return Conflict();
+                return Conflict(new { message = "Użytkownik o takim emailu już istnieje" });
             }
-            var passwordHasher = new PasswordHasher<User>();
-            var hashedPassword = passwordHasher.HashPassword(user, registerModel.Password);
-            var newUser = new User { Password = hashedPassword, Username = registerModel.Username };
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
+
             return Ok();
         }
     }

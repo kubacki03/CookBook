@@ -49,7 +49,7 @@ export default defineConfig({
     server: {
         proxy: {
             // API przez proxy -> to samo origin, więc ciasteczko z JWT (SameSite=Strict) jest wysyłane
-            '^/(Login|Recipe|Register)/': {
+            '^/(Login|Recipe|Register)(/|\\?|$)': {
                 target,
                 secure: false
             }

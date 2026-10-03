@@ -1,15 +1,7 @@
 ﻿namespace projektReact.Server
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection.Emit;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Identity;
+{ 
     using Microsoft.EntityFrameworkCore;
-    using projektReact.Server.DataModels;
-    using projektReact.Server.RequestModels;
+    using projektReact.Server.DataModels; 
 
     namespace ProjektWPF.Data
     {

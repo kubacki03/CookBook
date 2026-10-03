@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
 import Dashboard from './Dashboard';
 import UserRecipes from './UserRecipes';
 
@@ -30,6 +31,8 @@ const App = () => {
             <Routes>
               
                 <Route path="/" element={<LoginPage />} />
+
+                <Route path="/register" element={<RegisterPage />} />
              
                 <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
 
